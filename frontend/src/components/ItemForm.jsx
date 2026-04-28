@@ -8,6 +8,7 @@ function ItemForm({ initialValues, onSubmit, submitText }) {
       price: "",
       description: "",
       imageUrl: "",
+      supplierName: "",
     }
   );
 
@@ -18,6 +19,7 @@ function ItemForm({ initialValues, onSubmit, submitText }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     onSubmit({
       ...formData,
       price: Number(formData.price),
@@ -29,10 +31,20 @@ function ItemForm({ initialValues, onSubmit, submitText }) {
       <h2>{submitText}</h2>
 
       <label>Item Name</label>
-      <input name="name" value={formData.name} onChange={handleChange} required />
+      <input
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+      />
 
       <label>Category</label>
-      <input name="category" value={formData.category} onChange={handleChange} required />
+      <input
+        name="category"
+        value={formData.category}
+        onChange={handleChange}
+        required
+      />
 
       <label>Price</label>
       <input
@@ -53,9 +65,23 @@ function ItemForm({ initialValues, onSubmit, submitText }) {
       />
 
       <label>Image URL</label>
-      <input name="imageUrl" value={formData.imageUrl} onChange={handleChange} />
+      <input
+        name="imageUrl"
+        value={formData.imageUrl}
+        onChange={handleChange}
+      />
 
-      <button className="btn primary" type="submit">{submitText}</button>
+      <label>Supplier Name</label>
+      <input
+        name="supplierName"
+        value={formData.supplierName}
+        onChange={handleChange}
+        required
+      />
+
+      <button className="btn primary" type="submit">
+        {submitText}
+      </button>
     </form>
   );
 }

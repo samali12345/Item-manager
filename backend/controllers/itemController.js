@@ -25,7 +25,24 @@ export const getItemById = async (req, res) => {
 
 export const createItem = async (req, res) => {
   try {
-    const newItem = await Item.create(req.body);
+    const {
+      name,
+      category,
+      price,
+      description,
+      imageUrl,
+      supplierName,
+    } = req.body;
+
+    const newItem = await Item.create({
+      name,
+      category,
+      price,
+      description,
+      imageUrl,
+      supplierName,
+    });
+
     res.status(201).json(newItem);
   } catch (error) {
     res.status(400).json({
@@ -37,10 +54,30 @@ export const createItem = async (req, res) => {
 
 export const updateItem = async (req, res) => {
   try {
-    const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const {
+      name,
+      category,
+      price,
+      description,
+      imageUrl,
+      supplierName,
+    } = req.body;
+
+    const updatedItem = await Item.findByIdAndUpdate(
+      req.params.id,
+      {
+        name,
+        category,
+        price,
+        description,
+        imageUrl,
+        supplierName,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
     if (!updatedItem) {
       return res.status(404).json({ message: "Item not found" });
